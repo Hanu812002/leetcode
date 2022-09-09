@@ -6,10 +6,13 @@ public:
         int c=matrix[0].size();
         vector<int>v;
         int top=0,bot=r-1,right=c-1,left=0;
+        
         while(top<=bot && right>=left){
+            
             for(int i=left;i<=right;i++){
                 v.push_back(matrix[top][i]);
             }
+            
             top++;
             
             
@@ -34,7 +37,7 @@ public:
                }
                left++;
         }
-        }
+}
         return v;
     }
 };
