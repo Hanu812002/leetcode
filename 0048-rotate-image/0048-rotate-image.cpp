@@ -1,23 +1,22 @@
 class Solution {
 public:
-   void roro(vector<vector<int>>& matrix, int i, int k, int n){
-        for (int j=0; j<k; j++){
-            int t = matrix[i][i+j];
-            matrix[i][i+j] = matrix[n-i-1-j][i];
-            matrix[n-i-1-j][i] =  matrix[n-i-1][n-i-1-j];
-            matrix[n-i-1][n-i-1-j] = matrix[i+j][n-i-1];
-            matrix[i+j][n-i-1] = t;
-        }
-    }
-
     void rotate(vector<vector<int>>& matrix) {
-        int i = 0, n = matrix.size();
-        int k = n-1;
-        while (k>0){
-            roro(matrix,i,k,n);
-            i++;
-            k-=2;
+       int n=matrix.size();
+        for(int i=0; i<n; i++)
+          {
+              for(int j=i+1; j<n; j++)
+                  swap(matrix[i][j],matrix[j][i]);
+          }
+        
+        int i=0;
+        int j=n-1;
+        while(i<j){
+        for(int k=0;k<n;k++){
+            swap(matrix[k][i],matrix[k][j]);
         }
-        return;
+        i++;
+            j--;
+        }
+        
     }
 };
