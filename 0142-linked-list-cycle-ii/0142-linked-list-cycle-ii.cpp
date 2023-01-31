@@ -19,6 +19,7 @@ public:
             
             if(s==f)
             {
+                cout<<s->val<<" "<<f->val<<endl;
                 s=head;
                 while(s!=f){
                     s=s->next;
