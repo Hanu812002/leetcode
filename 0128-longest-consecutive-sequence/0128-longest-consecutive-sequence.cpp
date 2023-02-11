@@ -1,30 +1,39 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        unordered_map<int,int>mp;
-        if(nums.size()==0)
-            return 0;
-        for(auto i : nums){
-            mp[i]=1;
-        }
-        for(auto i :nums){
-            if(mp.find(i-1)!=mp.end())
-                mp[i]=0;
-        }
+         int n = nums.size();
+        int maxi = 0;
         
-        int ans=-1;
+        unordered_set<int> uset, seen;
         
-        for(auto i : nums){
-            if(mp[i]==1){
-                int len=1;
-                while(mp.find(i+len)!=mp.end())
-                {
-                    len++;
+        for(int i = 0; i < n; i++)
+            uset.insert(nums[i]);
+        
+        for(int i = 0; i < n; i++){
+            
+            if( seen.find(nums[i]) == seen.end() ){
+                
+                int count = 1;
+                
+                int present = nums[i]-1;
+                while(uset.find(present) != uset.end()){
+                    count++;
+                    seen.insert(present--);                
                 }
-                ans=max(ans,len);
+                
+                // Finding right longest streak
+                present = nums[i]+1;
+                while(uset.find(present) != uset.end()){
+                    count++;
+                    seen.insert(present++);           
+                }
+                
+                maxi = max(maxi, count);
             }
+            
         }
         
-        return ans;
+        return maxi;
+
     }
 };
