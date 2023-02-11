@@ -21,7 +21,7 @@ public:
                     seen.insert(present--);                
                 }
                 
-                // Finding right longest streak
+    
                 present = nums[i]+1;
                 while(uset.find(present) != uset.end()){
                     count++;
