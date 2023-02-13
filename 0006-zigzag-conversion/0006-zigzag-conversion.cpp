@@ -1,24 +1,35 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
+        string ans;
+        vector<string> temp(numRows);
+        int direction = 1;
+        int j = 0;
         
-     if(numRows==1 || numRows>=s.length()) return s;
-        string res = "";
-           
-        for(int j=0;j<numRows;j++){
-            res+=s[j];
-            int x=j;
-            while(x<s.length()){
-                int y= (numRows-j-1)*2;
-                x=x+y;
-                if(y!=0 && x<s.length()) res+=s[x];
-                
-                y=j*2;
-                x=x+y;
-                if(y!=0 && x<s.length()) res+=s[x];
+        if(numRows==1)
+            return s;
+        
+        for(int i=0;i<s.length();i++){
+            
+            // cout<<j<<endl;
+            temp[j] += s[i];
+            
+            if(j==numRows-1){
+              direction=-1;
             }
+            
+            else if(j==0){
+                direction=1;
+            }
+            
+            j+=direction;
+            
         }
         
-        return res;
+        for(auto s:temp){
+            ans += s;
+        }
+        
+        return ans;
     }
 };
