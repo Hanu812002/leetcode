@@ -1,30 +1,27 @@
 class Solution {
 public:
-      vector<vector<int>>ans;
-    //Function to return a list of indexes denoting the required 
-    //combinations whose sum is equal to given number.
-    	void fun(vector<int>arr,int i,int n,int sum,vector<int>&v){
-	   
-	        
-	    if(i==n){
-	         if(sum==0)
-	        ans.push_back(v);
-	       return;
-	    }
-	   // if(sum</
-	      
-	    if(sum>=arr[i]){
-	    v.push_back(arr[i]);
-	    fun(arr,i,n,sum-arr[i],v);
-	    v.pop_back();
-	    }
-	    fun(arr,i+1,n,sum,v);
-	      
-	}
-
-    vector<vector<int>> combinationSum(vector<int>& c, int target) {
-     vector<int>v;
-        fun(c,0,c.size(),target,v);
+    vector<vector<int>>ans;
+    void fun(vector<int>&s,int sum,int i,vector<int>&v){
+       if(i==s.size()){
+        if(sum==0)
+        {
+            ans.push_back(v);
+        }
+            return ;
+        }
+        
+        if(s[i]<=sum){
+            v.push_back(s[i]);
+            fun(s,sum-s[i],i,v);
+           v.pop_back();
+        }
+        
+        fun(s,sum,i+1,v);
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int>v;
+        fun(candidates,target,0,v);
         return ans;
     }
 };
