@@ -1,20 +1,22 @@
 class Solution {
 public:
     vector<vector<int>>ans;
-    void fun(int i,vector<int>&nums){
-        if(i==nums.size()-1)
-        {
-            ans.push_back(nums);
+    void fun(vector<int>&v,int i){
+        if(i==v.size()){
+            ans.push_back(v);
             return;
         }
-        for(int j=i;j<nums.size();j++){
-            swap(nums[j],nums[i]);
-        fun(i+1,nums);
-            swap(nums[j],nums[i]);
+        
+        
+        for(int j=i;j<v.size();j++){
+            swap(v[i],v[j]);
+            fun(v,i+1);
+            swap(v[i],v[j]);
         }
+        
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        fun(0,nums);
+        fun(nums,0);
         return ans;
     }
 };
