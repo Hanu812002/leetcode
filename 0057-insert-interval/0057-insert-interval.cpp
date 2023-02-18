@@ -1,24 +1,24 @@
 class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        vector<vector<int>>ans;
-        for(auto &&i:intervals){
-    //  the new interval is after the range of other interval
-            if(i[1]<newInterval[0])ans.push_back(i);
-    // the new interval's range is before the other
-            else if(newInterval[1]<i[0]){
-                ans.push_back(newInterval);
-                newInterval=i;//updating the new interval
-            }
-    // the new interval is in the range of the other interval
+        intervals.push_back(newInterval);
+        sort(intervals.begin(),intervals.end());
+        int a=intervals[0][0];
+        int b=intervals[0][1];
+        vector<vector<int>>v;
+        for(int i=1;i<intervals.size();i++){
+            
+            if(b>=intervals[i][0])
+                b=max(b,intervals[i][1]);
             else{
-                newInterval[0]=min(newInterval[0],i[0]);
-                newInterval[1]=max(newInterval[1],i[1]);
-            }    
+                v.push_back({a,b});
+                a=intervals[i][0];
+                b=intervals[i][1];
+            }
+            
         }
-    //At the end after the loop just add the updated newIntervals
-        ans.push_back(newInterval);
-        return ans;
-
+                        v.push_back({a,b});
+       return v;
     }
+    
 };
