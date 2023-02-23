@@ -9,18 +9,20 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        if(!head)
-            return NULL;
-        ListNode *f=head;
+       ListNode *f=head;
         ListNode *s=head;
-        while( f!=NULL && f->next!=NULL ){
-            s=s->next;
+        
+        if(head==NULL || head->next==NULL)
+            return NULL;
+        
+        
+        while(f->next!=NULL && f->next->next!=NULL){
             f=f->next->next;
+            s=s->next;
             
-            if(s==f)
+            if(f->next==s->next)
             {
-                cout<<s->val<<" "<<f->val<<endl;
-                s=head;
+                 s=head;
                 while(s!=f){
                     s=s->next;
                     f=f->next;
@@ -28,7 +30,8 @@ public:
                 return s;
             }
         }
-     // ListNode *n=new ListNode(-1);
+        
         return NULL;
+   
     }
 };
