@@ -1,28 +1,24 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        string ans="";
-        string st="";
-        int f=0;
-        for(int i=s.size()-1;i>=0;i--){
-            if(s[i]==' ' && f==1){
-                // cout<<ans<<"4"<<st<<endl;
-               ans+=st;
-               ans+=' ';
-               st="";
-                f=0;
+      string ans="";
+        string str="";
+        
+        for(int i=0;i<s.length();i++){
+            if(i>0 && s[i-1]!=' ' && s[i]==' '){
+                
+                ans=str+' '+ans;
+                str="";
+                
             }
             else if(s[i]!=' '){
-                st=s[i]+st;
-                f=1;
+                str+=s[i];
             }
         }
-        // ans.pop_back();
+        if(s[s.length()-1]!=' ')
+        ans=str+' '+ans;
         
-        // cout<<ans<<endl;
-        ans+=st;
-                if(ans[ans.size()-1]==' ')
-            ans.pop_back();
+        ans.pop_back();
         return ans;
     }
 };
