@@ -11,23 +11,16 @@
  */
 class Solution {
 public:
-//     void fun(TreeNode* l,TreeNode* r){
-//         if(l==NULL && r==NULL)
-//             return;
-//         swap(l->val,r->val);
-//             fun(l->left,r->right);
-//             fun(l->right,r->left);
-            
-
-//     }
+    void invert(TreeNode* root){
+        if(root==NULL)
+            return;
+        swap(root->left,root->right);
+        invert(root->left);
+        invert(root->right);
+        
+    }
     TreeNode* invertTree(TreeNode* root) {
-     if(root==NULL)  
-         return root;
-       
-       TreeNode* r=invertTree(root->left);
-       TreeNode* l=invertTree(root->right);
-        root->right=r;
-        root->left=l;
+   invert(root);
         
         return root;
     }
