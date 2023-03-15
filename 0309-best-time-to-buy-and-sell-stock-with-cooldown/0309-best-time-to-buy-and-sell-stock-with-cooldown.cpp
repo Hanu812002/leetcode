@@ -1,26 +1,29 @@
 class Solution {
 public:
-int fun(vector<int>&p,int i,int buy,int n,vector<vector<int>>&dp){
-    if(i>=n)
-    return 0;
-
+    int fun(vector<int>&prices,int i,int buy,vector<vector<int>>&dp){
+        if(i>=prices.size())
+            return 0;
+            
+            
     if(dp[i][buy]!=-1)
-     return dp[i][buy];
-
-     int ans;
-    if(buy==0){
-        ans=max(fun(p,i+1,0,n,dp),(-p[i]+fun(p,i+1,1,n,dp)));
+        return dp[i][buy];
+        
+    int l=0;
+     if(buy==0){
+         l=max(-prices[i]+fun(prices,i+1,1,dp),fun(prices,i+1,0,dp));
+     }
+      else{
+            l=max(prices[i]+fun(prices,i+2,0,dp),fun(prices,i+1,1,dp));
+      }
+      return dp[i][buy]=l;
     }
-    if(buy==1){
-        ans=max(fun(p,i+1,1,n,dp),(p[i]+fun(p,i+2,0,n,dp)));
-    }
-    return dp[i][buy]=ans;
-}
-    int maxProfit(vector<int>& p) {
-         int n = p.size();
-    vector<vector<int>> dp(n,vector<int>(2,-1));
-    
-    int ans = fun(p,0,0,n,dp);
-    return ans;
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+     vector<vector<int>> dp(n,vector<int>(2,-1));
+         return fun(prices,0,0,dp);
+//         for(int i=0;i<n;i++)
+//             cout<<dp[i]<<" ";
+        
+       
     }
 };
