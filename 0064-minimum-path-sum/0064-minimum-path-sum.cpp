@@ -1,14 +1,30 @@
 class Solution {
 public:
-    int f(int i, int j, vector<vector<int>>& grid, vector<vector<int>>& dp){
-        if(i==0 && j==0){return grid[i][j];}
-        if(i<0 || j<0){return 1e9;}
-        if(dp[i][j]!=-1){return dp[i][j];}
-        return dp[i][j]=min(grid[i][j]+f(i-1, j, grid, dp), grid[i][j]+f(i, j-1, grid, dp));
+    int ans=INT_MAX;
+    int min_path(vector<vector<int>>& grid,int i,int j,vector<vector<int>>& dp){
+        if(i>=grid.size() || j>=grid[0].size())
+            return INT_MAX;
+        
+        if(i==grid.size()-1 && j==grid[0].size()-1)
+        {
+            return grid[i][j];
+        }
+        
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        
+         int a=grid[i][j]+min(min_path(grid,i+1,j,dp),min_path(grid,i,j+1,dp));
+        
+        // cout<<a<<" "<<i<<"  "<<j<<endl;
+        
+        return dp[i][j]=a;
+        
     }
     int minPathSum(vector<vector<int>>& grid) {
-        int n=grid.size(), m=grid[0].size();
-        vector<vector<int>>dp(n, vector<int>(m, -1));
-        return f(n-1, m-1, grid, dp);
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>>dp(n,vector<int>(m,-1));
+        return min_path(grid,0,0,dp);
+        // return ans;
     }
 };
