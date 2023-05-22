@@ -18,19 +18,9 @@ public:
             }
             
         }
-        
-        c=0;
-        
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]==nums[major_index])
-                c++;
-        }
-        
-        
-        // if(c>=n/2)
+       
             return nums[major_index];
-        // else
-        //     return 
+        
    
     }
 };
