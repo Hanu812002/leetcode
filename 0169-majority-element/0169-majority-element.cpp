@@ -1,29 +1,36 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-       int counter = 0, majority;
-        for (int num : nums) {
-            if (!counter) {
-                majority = num;
+    
+        
+        int major_index=0;
+        int c=1;
+        
+        for(int i=1;i<nums.size();i++){
+            if(nums[major_index]==nums[i])
+                c++;
+            else
+                c--;
+            
+            if(c==0){
+                major_index=i;
+                c=1;
             }
-            counter += num == majority ? 1 : -1;
+            
         }
-        return majority;
+        
+        c=0;
+        
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==nums[major_index])
+                c++;
+        }
         
         
-//         int majority = 0;
-//         for (unsigned int i = 0, mask = 1; i < 32; i++, mask <<= 1) {
-//             int bits = 0;
-//             for (int num : nums) {
-//                 if (num & mask) {
-//                     bits++;
-//                 }
-//             }
-//             if (bits > nums.size() / 2) {
-//                 majority |= mask;
-//             }
-//         }
-//         return majority;
+        // if(c>=n/2)
+            return nums[major_index];
+        // else
+        //     return 
    
     }
 };
