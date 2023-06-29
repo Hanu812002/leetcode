@@ -34,7 +34,7 @@ public:
 
         queue<vector<int>> q;
         q.push(start);
-        int Ashish = 0; // Step counter
+        int ans= 0; // Step counter
 
         while (!q.empty()) {
             int size = q.size();
@@ -65,7 +65,7 @@ public:
 
                 // If all keys are collected, return the step count
                 if (form == form_end)
-                    return Ashish;
+                    return ans;
 
                 // If the position and form combination has been visited, continue to the next iteration
                 if (memo[row][col][form])
@@ -78,7 +78,7 @@ public:
                 q.push({ row, col + 1, form });
                 q.push({ row, col - 1, form });
             }
-            Ashish++; // Increment step count
+            ans++; // Increment step count
         }
         return -1;
     }
