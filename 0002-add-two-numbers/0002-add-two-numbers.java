@@ -26,8 +26,8 @@ class Solution {
             s+=c;
             c=s/10;
             s=s%10;
-            ListNode node = new ListNode(s);
-            temp.next = node;
+            // ListNode node = new ListNode(s);
+            temp.next =  new ListNode(s);
             temp = temp.next;
         }
         return dummy.next;
