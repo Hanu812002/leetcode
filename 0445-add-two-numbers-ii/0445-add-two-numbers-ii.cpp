@@ -24,18 +24,6 @@ public:
         }
         return prev;
     }
-    ListNode*rev2(ListNode*head){
-        if(head==NULL){
-            return NULL;
-        }
-        if(head->next==NULL){
-            return head;
-        }
-        ListNode*newhead=rev2(head->next);
-        head->next->next=head;
-        head->next=NULL;
-        return newhead;
-    }
     ListNode* solve(ListNode* head1, ListNode* head2) {
           int car=0;
     ListNode*p=new ListNode(9);
