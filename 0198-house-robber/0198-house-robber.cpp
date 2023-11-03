@@ -1,17 +1,27 @@
 class Solution {
 public:
-    int dp[105];
-    int fun(vector<int>&nums,int i){
-        if(i>=nums.size())
-            return 0;
+    
+    int fun(int i,vector<int>&dp,vector<int>&nums){
+        
+        if(i<0)
+         return 0;
         
         if(dp[i]!=-1)
             return dp[i];
         
-        return dp[i]=max(fun(nums,i+1),nums[i]+fun(nums,i+2));
+        
+          int op1=fun(i-1,dp,nums);
+            int op2=nums[i]+fun(i-2,dp,nums);
+        
+        // cout<<i<<" "<<op1<<"  "<<op2<<endl;
+        
+        return dp[i]=max(op1,op2);
+        
     }
     int rob(vector<int>& nums) {
-                memset(dp, -1, sizeof(dp));
-        return fun(nums,0);
+        
+        vector<int>dp(nums.size()+1,-1);
+        // dp[0]=nums[0];
+        return fun(nums.size()-1,dp,nums);
     }
 };
