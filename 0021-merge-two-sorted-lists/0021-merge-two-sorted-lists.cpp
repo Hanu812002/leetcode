@@ -11,39 +11,49 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode* temp=new ListNode();
-        ListNode* ans=temp;
+                if(list1 == NULL)
+            return list2;
+		
+		// if list2 happen to be NULL
+		// we will simply return list1.
+        if(list2 == NULL)
+            return list1;
         
-        while(list1 && list2){
-            if(list1->val>list2->val){
-            ListNode* node = new ListNode(list2->val);
-            temp->next = node;
-            temp = temp->next;
-                list2=list2->next;
+        ListNode * ptr = list1;
+        if(list1 -> val > list2 -> val)
+        {
+            ptr = list2;
+            list2 = list2 -> next;
+        }
+        else
+        {
+            list1 = list1 -> next;
+        }
+        ListNode *curr = ptr;
+        
+		// till one of the list doesn't reaches NULL
+        while(list1 &&  list2)
+        {
+            if(list1 -> val < list2 -> val){
+                curr->next = list1;
+                list1 = list1 -> next;
             }
             else{
-            ListNode* node = new ListNode(list1->val);
-          temp->next = node;
-            temp = temp->next;
-                list1=list1->next;
+                curr->next = list2;
+                list2 = list2 -> next;
             }
+            curr = curr -> next;
+                
         }
-        
-        while(list1){
+		
+		// adding remaining elements of bigger list.
+        if(!list1)
+            curr -> next = list2;
+        else
+            curr -> next = list1;
             
-            ListNode* node = new ListNode(list1->val);
-           temp->next = node;
-            temp = temp->next;     list1=list1->next;
-        }
+        return ptr;
+
         
-        
-        while(list2){
-            
-            ListNode* node = new ListNode(list2->val);
-            temp->next = node;
-            temp = temp->next;    list2=list2->next;
-        }
-        
-        return ans->next;
     }
 };
