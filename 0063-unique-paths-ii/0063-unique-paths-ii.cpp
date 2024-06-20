@@ -1,15 +1,24 @@
+
 class Solution {
 public:
-     int dp[101][101]{};
-    int uniquePaths(int m, int n, int i, int j , vector<vector<int>>& o) {
-        if(i >= m || j >= n || o[i][j]==1) return 0;
-        if(i == m-1 && j == n-1) return 1;
-        if(dp[i][j]) return dp[i][j];
-        return dp[i][j] = uniquePaths(m, n, i+1, j,o) + uniquePaths(m, n, i, j+1,o);
+    int fun(int m,int n,vector<vector<int>>&dp,vector<vector<int>>&o){
+     
+    
+        if(m<0 || n<0 || o[m][n]==1)
+            return 0;
+        
+        if(m==0 && n==0)
+            return 1;
+        
+        if(dp[m][n]!=-1)
+            return dp[m][n];
+        
+        return dp[m][n]= fun(m-1,n,dp,o)+fun(m,n-1,dp,o);   
     }
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        int m=obstacleGrid.size();
-        int n=obstacleGrid[0].size();
-        return uniquePaths(m,n,0,0,obstacleGrid);
+   int uniquePathsWithObstacles(vector<vector<int>>& o) {
+       int m=o.size();
+       int n=o[0].size();
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        return fun(m-1,n-1,dp,o);
     }
 };
